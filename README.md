@@ -1,3 +1,3 @@
 # Intención del sitio
 
-El proposito de este sitio es dar a conocer las publicaciones realizadas y los logros que he tenido.
+El proposito de este sitio es dar a conocer las publicaciones realizada, logros que he tenido y otros datos.
