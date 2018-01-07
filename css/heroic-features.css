@@ -10,10 +10,24 @@ body {
 
 @media (min-width: 992px) {
   body {
+    background-color: #F8F8FF;
     padding-top: 56px;
   }
 }
 
+.container {
+}
+
 .card {
   height: 100%;
+  /*border: 0px solid rgba(0, 0, 0, 0);*/
+}
+
+h4 {
+  text-align: center;
+  background-color: #E6E6FA;
+}
+
+p {
+  text-align: justify;
 }
