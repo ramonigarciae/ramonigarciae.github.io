@@ -80,3 +80,17 @@ body {
   * {
       font-family: Arial, Helvetica, sans-serif
   }
+
+  .puntuacion {
+    width: 100%;
+    position: absolute;
+    top: 50px;
+    border: 2px solid gray;
+    font-size: 1.5em;
+    font-family: Arial, Helvetica, sans-serif
+  }
+
+  .etapa, .nivel, .puntuacion-actual, .puntuacion-maxima {
+    width: 25%;
+    float: left;
+  }
