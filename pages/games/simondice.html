@@ -1,39 +1,45 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Ramón García - Simón dice</title>
-    <!-- Bootstrap core CSS -->
-    <link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <link href="../../css/heroic-features.css" rel="stylesheet">
-    <link href="../../css/games/simondice.css" rel="stylesheet">
-  </head>
-  <body>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <div class="container">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item ">
-                    <a class="nav-link" href="../../index.html">Acerca de mi</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Diviertete</a>
-                </li>
-            </ul>
-            </div>
-        </div>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Ramón García</title>
+  <link rel="icon" type="image/png" href="../../images/logo-black-white.png" />
+
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Fjalla+One&display=swap" rel="stylesheet">
+  <!-- Bootstrap core CSS -->
+  <!--<link href="../../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">-->
+  <!-- Custom styles for this template -->
+
+  <link href="../../css/games/simondice.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/estilos.css" />
+</head>
+
+<body>
+  <header class="header">
+
+    <figure class="logo">
+      <img src="../../images/logo-black-white.png" alt="Logo de http://ramonigarciae.com" width="100px;">
+    </figure>
+    <nav class="menu">
+      <ol>
+        <li>
+          <a class="link" href="../../index.html">Inicio</a>
+        </li>
+      </ol>
     </nav>
 
+  </header>
+  <div class="container">
     <div class="puntuacion">
       <div class="etapa"><label>Etapa:</label><label class="" id="etapa"></label></div>
       <div class="nivel"><label>Nivel:</label><label class="" id="nivel"></label></div>
       <div class="puntuacion-actual"><label>Puntuación:</label><label class="" id="puntuacion"></label></div>
-      <div class="puntuacion-maxima"><label>Puntuación máxima:</label><label class="" id="puntuacionMaxima"></label></div>
+      <div class="puntuacion-maxima"><label>Puntuación máxima:</label><label class="" id="puntuacionMaxima"></label>
+      </div>
     </div>
 
     <div class="gameboard">
@@ -44,7 +50,31 @@
       <button id="btnEmpezar" class="btn-start" onclick="empezarJuego()">Empezar a jugar!</button>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
-    <script src="../../js/games/simondice.js"></script>
-  </body>
+  </div>
+  
+  <section id="contacto" class="contact">
+    <form action="/suscripcion/" class="form-email">
+      <h3>¿Creamos algo juntos?</h3>
+      <input type="text" id="email" placeholder="Déjame tu email">
+      <button type="submit">Enviar</button>
+    </form>
+    <div class="social">
+      <a href="https://twitter.com/RamonIGE" class="social-link twiteer" target="_blank"></a>
+      <a href="https://web.facebook.com/garciae.ramon" class="social-link facebook" target="_blank"></a>
+      <a href="https://github.com/ramonigarciae" class="social-link github" target="_blank"></a>
+      
+    </div>
+  </section>
+  <footer class="footer">
+    <div>
+      <p>Página personal con propósitos informativos</p>
+    </div>
+    <div>
+      <p></p>
+    </div>
+  </footer>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+  <script src="../../js/games/simondice.js"></script>
+</body>
+
 </html>
