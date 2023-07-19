@@ -1,0 +1,264 @@
+<html>
+
+<head>
+    <title>Prueba checkout</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js">
+       </script>
+</head>
+
+<body>
+    <div>
+
+
+        <table>
+            <tr>
+                <td>Comercio ID</td>
+                <td><input type="text" id="txtMerchantId" /></td>
+            </tr>
+            <tr>
+                <td>Llave privada</td>
+                <td><input type="text" id="txtKey" /></td>
+            </tr>
+        </table>
+    </div>
+    <br>
+    <table>
+        <tr>
+            <td colspan="2">
+                <fieldset>
+                    <legend>Selecciona un país:</legend>
+
+                    <div>
+                        <input type="radio" id="co" name="rbCountry" value="COP">
+                        <label for="COP">Colombia</label>
+                    </div>
+
+                    <div>
+                        <input type="radio" id="mx" name="rbCountry" value="MXN">
+                        <label for="MXN">México</label>
+                    </div>
+
+                    <div>
+                        <input type="radio" id="pe" name="rbCountry" value="PEN" checked>
+                        <label for="PEN">Perú</label>
+                    </div>
+                </fieldset>
+            </td>
+
+            <td colspan="2">
+                <fieldset>
+                    <legend>Selecciona un ambiente:</legend>
+
+                    <div>
+                        <input type="radio" id="local" name="rbEnvironment" value="local" checked>
+                        <label for="local">Local</label>
+                    </div>
+
+                    <div>
+                        <input type="radio" id="dev" name="rbEnvironment" value="dev">
+                        <label for="dev">Desarrollo</label>
+                    </div>
+
+                    <div>
+                        <input type="radio" id="qa" name="rbEnvironment" value="qa">
+                        <label for="qa">QA</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="sandbox" name="rbEnvironment" value="sandbox">
+                        <label for="sandbox">Sandbox</label>
+                    </div>
+                </fieldset>
+            </td>
+        </tr>
+    </table>
+
+    <table>
+        <tr>
+            <td>Importe</td>
+            <td><input type="number" id="txtAmount" /></td>
+        </tr>
+
+        <tr>
+            <td>Moneda</td>
+            <td><label id="lblCurrency"></label></td>
+        </tr>
+
+        <tr>
+            <td>Descripción</td>
+            <td><input type="text" id="txtDescription" /></td>
+        </tr>
+
+        <tr>
+            <td>Redirect URL</td>
+            <td><input type="text" id="txtRedirectUrl" /></td>
+        </tr>
+        <tr>
+            <td>Fecha de expiración</td>
+            <td><input type="datetime" id="txtExpirationDate" /></td>
+        </tr>
+        <tr>
+            <td>Cancel URL</td>
+            <td><input type="text" id="txtCancelUrl" /></td>
+        </tr>
+        <tr>
+            <td>Order id</td>
+            <td><input type="text" id="txtOrderId" /></td>
+        </tr>
+        <tr>
+
+        </tr>
+        <tr>
+            <td colspan="2"><label id="lblCheckout"></label></td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td>
+                Enviar
+            </td>
+            <td>
+                <button id="bClick">Enviar</button>
+
+                <label id="lblMessage"></label>
+            </td>
+        </tr>
+    </table>
+
+    <select id="optSend">
+        <option>Lista de peticiones enviadas</option>
+    </select>
+    <br>
+
+    <textarea id="myTextarea" rows="100" cols="50"></textarea>
+
+    <script type="text/javascript">
+
+
+
+        $(document).ready(function () {
+            var dataMerchant = {
+                idMerchant: "mdgn21la6cgs2j7xbjjk",
+                apiKey: "sk_50f78e10a9fd41ce996cb777e3c34ecf"
+            }
+
+            var data = {
+                "amount": 250,
+                "currency": "PEN",
+                "description": "Cargo cobro con link",
+                "redirect_url": "https://misitioempresa.pe",
+                "order_id": "",
+                "expiration_date": "2023-08-31 12:50",
+                "send_email": "true",
+                "redirect_store_payment": "true",
+                "origin": "file:///Users/ramon.garcia/Desktop/proyecto-boton/app-shop/index.html",
+                "cancel_url": "https://www.google.com/",
+                "customer": {
+                    "name": "Cliente Perú",
+                    "last_name": "Vazquez Juarez",
+                    "phone_number": "4448936475",
+                    "email": "juan.vazquez@empresa.pe"
+                }
+            }
+            $("#txtMerchantId").val(dataMerchant.idMerchant);
+            $("#txtKey").val(dataMerchant.apiKey);
+
+            $("#txtAmount").val(data.amount);
+            $("#lblCurrency").text(data.currency);
+            $("#txtDescription").val(data.description);
+            $("#txtRedirectUrl").val(data.redirect_url);
+
+            $("#txtExpirationDate").val(data.expiration_date);
+            $("#txtCancelUrl").val(data.cancel_url);
+
+            $('input[type=radio][name=rbCountry]').change(function () {
+                $("#lblCurrency").text($(this).val());
+                $('input[type=radio][name=rbEnvironment]').change();
+
+            });
+            $("#myTextarea").val("");
+
+            $('input[type=radio][name=rbEnvironment]').change(function () {
+
+                var env = $('input[name="rbEnvironment"]:checked').val();
+                switch (env) {
+                    case 'local':
+                        $("#lblCheckout").text("https://localhost:8443/Services/v1/[idComercio]/checkouts");
+                        break;
+                    case 'dev':
+                        $("#lblCheckout").text("https://dev-api.openpay.[country]/v1/[idComercio]/checkouts");
+                        break;
+                    case 'qa':
+                        $("#lblCheckout").text("https://qa-api.openpay.[country]/v1/[idComercio]/checkouts");
+                        break;
+                    case 'sandbox':
+                        $("#lblCheckout").text("https://sandbox-api.openpay.[country]/v1/[idComercio]/checkouts");
+                        break;
+                }
+                $("#lblCheckout").text($("#lblCheckout").text().replace("[idComercio]", $("#txtMerchantId").val()));
+
+                var country = $('input[name="rbCountry"]:checked').val();
+
+                switch (country) {
+                    case 'COP':
+                        $("#lblCheckout").text($("#lblCheckout").text().replace('[country]', 'co'))
+                        break;
+                    case 'MXN':
+                        $("#lblCheckout").text($("#lblCheckout").text().replace('[country]', 'mx'))
+                        break;
+                    case 'PEN':
+                        $("#lblCheckout").text($("#lblCheckout").text().replace('[country]', 'pe'))
+                        break;
+                }
+            });
+
+            $("#optSend").change(function () {
+                $("#myTextarea").val($("#optSend option:selected")[0].outerHTML)
+            })
+
+            $("#txtMerchantId").change(function () {
+                $('input[type=radio][name=rbCountry]').change();
+            });
+
+            $('input[type=radio][name=rbCountry]').change();
+
+
+            $("button").click(function () {
+
+                data.amount = $("#txtAmount").val();
+                data.currency = $("#lblCurrency").text();
+                data.description = $("#txtDescription").val();
+                data.redirect_url = $("#txtRedirectUrl").val();
+
+                data.expiration_date = $("#txtExpirationDate").val();
+                data.cancel_url = $("#txtCancelUrl").val();
+                data.order_id = $("#txtOrderId").val();
+
+                $("#lblMessage").text("Procesando");
+                $.ajax({
+                    type: "POST",
+                    dataType: 'json',
+                    contentType: "application/json",
+                    url: $("#lblCheckout").text(),
+                    headers: {
+                        'Authorization': 'Basic ' + btoa($("#txtKey").val() + ':' + '')
+                    },
+                    data: JSON.stringify(data),
+                    success: function (result) {
+                        $("#lblMessage").text("Éxito: " + result.checkout_link);
+                        window.open(result.checkout_link, '_blank');
+                        var optValue = { request: data, response: result }
+                        $('<option value=' + JSON.stringify(optValue) + '>' + $("#lblCheckout").text() + ' - ' + data.order_id + ' ---> ' + result.checkout_link + '</option>').appendTo('#optSend');
+                    },
+                    error: function (e) {
+                        $("#lblMessage").text("Error al procesar la solicitud: " + e.responseJSON.description);
+                    }
+
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
